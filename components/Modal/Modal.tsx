@@ -18,19 +18,25 @@ export default function Modal({
   useEffect(() => {
     setMounted(true);
 
-    const handleEsc = (event: KeyboardEvent) => {
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
 
-    window.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
+
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
+      document.body.style.overflow = "auto";
+
       window.removeEventListener(
         "keydown",
-        handleEsc
+        handleEscape
       );
+
+      setMounted(false);
     };
   }, [onClose]);
 

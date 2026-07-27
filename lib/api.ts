@@ -37,11 +37,15 @@ export async function fetchNotes({
   return data;
 }
 
-export async function fetchNoteById(id: string) {
-  const { data } = await api.get(`/notes/${id}`);
+export const fetchNoteById = async (
+  id: string
+): Promise<Note> => {
+  const response = await axios.get<Note>(
+    `/notes/${id}`
+  );
 
-  return data;
-}
+  return response.data;
+};
 
 interface CreateNoteData {
   title: string;
